@@ -212,19 +212,15 @@ document.getElementById("electric").addEventListener("click", function () {
 })
 function pintarPokemon(pokemon) {
 
-    let nom = document.createElement("h1")
+    let nom = document.createElement("h2")
     let imatge = document.createElement("img")
    
-    nom.innerHTML = pokemon.name;
+    nom.innerHTML = pokemon.name.toUpperCase();
     imatge.src = pokemon.sprites.front_default;
 
     //document.getElementById("resultat").innerHTML = ""
   
     document.getElementById("resultat").append(nom)
-    document.getElementById("resultat").append(imatge)
-
-
-
-    
+    document.getElementById("resultat").append(imatge) 
 
 }
