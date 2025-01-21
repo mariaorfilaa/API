@@ -1,3 +1,4 @@
+
 document.getElementById("button").addEventListener("click", function () {
     const xhr = new XMLHttpRequest();
 
@@ -89,6 +90,48 @@ document.getElementById("tipos").addEventListener("click", function () {
     xhr.send();
 })
 
+document.getElementById("pes").addEventListener("click", function () {
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === this.DONE) {
+            const response = JSON.parse(this.responseText);
+            
+             document.getElementById("resultat").innerHTML = ""
+
+             let pes = document.getElementById("pesito").value;
+
+            for (let i = 0; i < response.results.length; i++) {
+
+                const xhr1 = new XMLHttpRequest();
+
+                xhr1.addEventListener('readystatechange', function () {
+                    if (this.readyState === this.DONE) {
+                        const response = JSON.parse(this.responseText);
+                        
+                        for(let a = 0; a<response.types.length; a++ ){
+                            
+                            if(response.weight > pes){
+                                pintarPokemon(response);
+                            }
+
+                        }
+
+                    
+                    }
+                });
+
+                xhr1.open('GET', response.results[i].url);
+                xhr1.send();
+
+            }
+        }
+    });
+
+    xhr.open('GET', `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`);
+    xhr.send();
+})
+
 document.getElementById("moves").addEventListener("click", function () {
     const xhr = new XMLHttpRequest();
 
@@ -113,6 +156,50 @@ document.getElementById("moves").addEventListener("click", function () {
                             
                             if(response.moves[a].move.name == move){
                                 console.log(response.moves[a].move.name );
+                                console.log(response)
+                                pintarPokemon(response);
+                            }
+
+                        }
+
+                    
+                    }
+                });
+
+                xhr1.open('GET', response.results[i].url);
+                xhr1.send();
+
+            }
+        }
+    });
+
+    xhr.open('GET', `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`);
+    xhr.send();
+})
+
+document.getElementById("abilities").addEventListener("click", function () {
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === this.DONE) {
+            const response = JSON.parse(this.responseText);
+            
+             document.getElementById("resultat").innerHTML = ""
+
+             let ability = document.getElementById("ability").value;
+
+            for (let i = 0; i < response.results.length; i++) {
+
+                const xhr1 = new XMLHttpRequest();
+
+                xhr1.addEventListener('readystatechange', function () {
+                    if (this.readyState === this.DONE) {
+                        const response = JSON.parse(this.responseText);
+                        
+                        for(let a = 0; a<response.types.length; a++ ){
+                            
+                            if(response.abilities[a].ability.name == ability){
+                                console.log(response.abilities[a].ability.name );
                                 console.log(response)
                                 pintarPokemon(response);
                             }
